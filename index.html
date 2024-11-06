@@ -3,133 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>哥布林大圖鑑 - 封面</title>
+    <title>哥布林大圖鑑</title>
     <style>
-        body, html {
+        body {
+            font-family: Arial, sans-serif;
+            background: url('無標題511_20241101205855.png') no-repeat center center fixed;
+            background-size: cover;
             margin: 0;
             padding: 0;
-            height: 100%;
+            position: fixed; /* 鎖定頁面 */
+            overflow: hidden; /* 禁止滾動 */
+        }
+
+        /* 大標題樣式 */
+        header {
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: Arial, sans-serif;
-            background: url('背景_工作區域 1.png') no-repeat center center fixed;
-            background-size: cover;
-            position: relative;
-        }
-
-        .cover {
-            text-align: center;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            max-width: 700px; /* 調整 header 寬度 */
+            margin: 0 auto; /* 使 header 居中 */
+        }
+        
+
+        /* 圖片漸變動畫 */
+        header img {
+            width: 100%;
             max-width: 600px;
-            position: relative;
+            height: auto;
+            opacity: 0; /* 初始透明度 */
+            animation: fadeIn 2s ease forwards; /* 呼叫動畫 */
         }
 
-        .cover img.main-image {
-            width: 200px;
-            animation: fadeIn 3s ease forwards;
-            opacity: 0;
-            margin-bottom: 20px;
-            z-index: 1;
+        /* 漸變動畫效果 */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
-        .cover img.enter-button {
-            width: 50px;
+        /* 跑馬燈色塊樣式 */
+        .marquee-container {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: black; /* 黑色背景 */
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            z-index: 100;
+        }
+
+        /* 跑馬燈效果 */
+        .marquee {
+            white-space: nowrap;
+            animation: marquee 10s linear infinite;
+            font-size: 24px;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* 其餘樣式 */
+        .icons {
+            position: absolute;
+            top: -10px;
+            right: 30px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .icons img {
+            width: 450px;
+            height: 400px;
             cursor: pointer;
             transition: transform 0.2s;
-            animation: fadeIn 3s ease forwards;
-            opacity: 0;
+            top: -100px;
+        }
+
+        .icons img:hover {
+            transform: scale(1.1);
+        }
+
+        /* 哥布林守則彈出圖片 */
+        .rules-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* 半透明背景 */
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.5s ease; /* 漸變動畫 */
+            z-index: 1000;
+        }
+
+        .rules-image {
+            width: 80%;
+            max-width: 600px;
+            animation: scaleUp 1s ease; /* 放大動畫 */
+            transform: scale(2.5); /* 調整圖片放大比例 */
+        }
+
+        /* 關閉按鈕 */
+        .close-button {
             position: absolute;
-            top: 120%;
-            left: 30%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+            background: transparent;
+            border: none;
         }
 
-        .cover img.enter-button:hover {
-            transform: scale(1.1) translate(-50%, -50%);
-        }
-
+        /* 漸變動畫效果 */
         @keyframes fadeIn {
-            0% { opacity: 0; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(6); }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        /* 底部移動哥布林動畫樣式 */
-        .moving-goblin {
-            position: fixed;
-            bottom: 0px; /* 向下偏移，可以調整這個數值 */
-            width: 200px; /* 調整哥布林的寬度 */
-            height: auto; /* 使圖片維持比例 */
-            animation: goblinMove 4s linear infinite alternate;
-            transition: transform 0.5s; /* 添加平滑鏡像效果 */
-            z-index: 9999; /* 確保在最上層 */
+        @keyframes scaleUp {
+            from { transform: scale(0.5); }
+            to { transform: scale(1); }
         }
 
-        /* 左右移動的動畫 */
-        @keyframes goblinMove {
-            0% { left: 0; }
-            100% { left: calc(100% - 150px); }
+        /* 哥布林卡片設置 */
+        .goblin-card {
+            position: absolute;
+            width: 150px;
+            text-align: center;
+            transition: transform 0.2s;
+            animation: shake 2s infinite ease-in-out;
         }
 
-        /* 左右搖擺哥布林圖片樣式 */
-        .side-goblin {
-            position: fixed;
-            width: 300px;
+        .goblin-card img {
+            width: 100%;
             height: auto;
-            animation: sway 2s infinite ease-in-out; /* 搖擺動畫 */
+            transition: transform 0.2s;
         }
 
-        .left-goblin {
-            left: 100px;
-            top: 30%;
-            transform-origin: left center;
+        #fire-goblin { top: 400px; left: 900px; }
+        #ice-goblin { top: 650px; left: 800px; }
+        #storm-goblin { top: 700px; left: 1100px; }
+        #flame-goblin { top: 500px; left: 1250px; }
+        #dark-goblin { top: 700px; left: 300px; }
+        #sinister-goblin { top: 730px; left: 1400px; }
+        #glutton-goblin { top: 550px; left: 500px; }
+
+        .goblin-card:hover img {
+            transform: scale(1.1); /* 當鼠標懸停時，放大圖片 */
         }
 
-        .right-goblin {
-            right: 100px;
-            top: 50%;
-            transform-origin: right center;
+        .goblin-card {
+            position: absolute;
+            width: 50px; /* 增加寬度 */
+            text-align: center;
+            transition: transform 0.2s;
+            animation: shake 2s infinite ease-in-out;
+        }
+        .goblin-card {
+            position: fixed; /* 將這些元素固定 */
+            top: 400px; /* 設定固定位置 */
+            left: 900px;
+            width: 150px;
+            text-align: center;
+            animation: shake 2s infinite ease-in-out;
+}
+
+        .goblin-card img {
+            width: 120%; /* 圖片自適應卡片寬度 */
+            height: auto;
+            transition: transform 0.2s;
         }
 
-        /* 左右搖擺動畫 */
-        @keyframes sway {
-            0%, 100% { transform: rotate(-5deg); }
-            50% { transform: rotate(5deg); }
+        /* 動畫效果 */
+        @keyframes shake {
+            0% { transform: translateY(0); }
+            25% { transform: translateY(-5px); }
+            50% { transform: translateY(5px); }
+            75% { transform: translateY(-5px); }
+            100% { transform: translateY(0); }
         }
+
+        .return-button {
+            position: fixed;
+            bottom: 5px;
+            left: 0px;
+            width: 600px; /* 调整宽度 */
+            height: 400px; /* 调整高度 */
+            cursor: pointer;
+            
+        }
+      
+    /* 大標題樣式 */
+    .main-title img {
+        width: 100%;
+        max-width: 200px; /* 您可以根據需要調整此數值 */
+        height: auto;
+        margin: 0 auto;
+        display: block;
+        }
+
+        
     </style>
 </head>
 <body>
-    <img src="跑歌.PNG" alt="左側哥布林" class="side-goblin left-goblin">
-    <img src="2歌.PNG" alt="右側哥布林" class="side-goblin right-goblin">
-    <div class="cover">
-        <img src="封面_工作區域 1_工作區域 1.png" alt="哥布林標誌" class="main-image">
-        
-        <a href="Untitled-1.html">
-            <img src="按鈕_工作區域 1.png" alt="進入網站按鈕" class="enter-button">
+    <div class="main-title">
+        <img src="標題_工作區域 1.png" alt="哥布林大圖鑑標題">
+    </div>
+    <header>
+        <div class="icons">
+            <img src="守則板板_工作區域 1_工作區域 1.png" alt="哥布林守則圖示" id="rules-icon">
+        </div>
+    </header>
+
+    <!-- 哥布林卡片區域 -->
+    <div class="goblin-card" id="fire-goblin">
+        <a href="炙熱.html">
+            <img src="炙熱哥.PNG" alt="熾熱哥布林" title="熾熱哥布林">
+        </a>
+    </div>
+    <div class="goblin-card" id="ice-goblin">
+        <a href="冰霜.html">
+            <img src="冰霜哥.PNG" alt="冰霜哥布林" title="冰霜哥布林">
+        </a>
+    </div>
+    <div class="goblin-card" id="storm-goblin">
+        <a href="暴風.html">
+            <img src="暴風哥.PNG" alt="暴風哥布林" title="暴風哥布林">
+        </a>
+    </div>
+    <div class="goblin-card" id="flame-goblin">
+        <a href="烈焰.html">
+            <img src="烈焰哥.PNG" alt="烈焰哥布林" title="烈焰哥布林">
+        </a>
+    </div>
+    <div class="goblin-card" id="dark-goblin">
+        <a href="陰暗.html">
+            <img src="陰暗哥.PNG" alt="陰暗哥布林" title="陰暗哥布林">
+        </a>
+    </div>
+    <div class="goblin-card" id="sinister-goblin">
+        <a href="淫邪.html">
+            <img src="淫邪哥.PNG" alt="淫邪哥布林" title="淫邪哥布林">
+        </a>
+    </div>
+    <div class="goblin-card" id="glutton-goblin">
+        <a href="暴食.html">
+            <img src="暴食哥.PNG" alt="暴食哥布林" title="暴食哥布林">
         </a>
     </div>
 
-    <!-- 底部移動哥布林 -->
-    <img src="跑跑歌.png" alt="哥布林" class="moving-goblin" id="goblin">
+    <!-- 返回封面按鈕 -->
+    <a href="Untitled-2.html">
+        <img src="返回首頁_工作區域 1.png" alt="返回封面" class="return-button">
+    </a>
 
-    <!-- 左右兩側搖擺哥布林 -->
-    
+    <!-- 哥布林守則彈出圖片 -->
+    <div class="rules-overlay" id="rules-overlay">
+        <button class="close-button" onclick="closeRules()">✕</button>
+        <img src="守則_工作區域 1.png" alt="哥布林守則圖片" class="rules-image">
+    </div>
+
+    <!-- 背景音樂 -->
+    <audio src="類兒歌 哥布林之歌 [ ezmp3.cc ].mp3" autoplay loop></audio>
+
+    <!-- 跑馬燈區塊 -->
+    <div class="marquee-container">
+        <div class="marquee" id="marquee">跑馬燈效果，隨機顯示不同的文字</div>
+    </div>
 
     <script>
-        // 獲取底部移動哥布林元素
-        const goblin = document.getElementById('goblin');
-        let isFlipped = false;
+        // 隨機切換跑馬燈文字
+        const marqueeText = [
+            "身高超過180的就能脫離哥布林籍加入巨魔籍",
+            "你可以信任的其他種族是地精和巨魔",
+            "如果不幸走出森林，請及時返回。遇到危險時可求助於其他哥布林幹部",
+            "千萬不要走出森林"
+        ];
 
-        // 監聽動畫交替事件，當到達邊界時鏡像旋轉
-        goblin.addEventListener('animationiteration', () => {
-            isFlipped = !isFlipped;
-            goblin.style.transform = isFlipped ? 'scaleX(-1)' : 'scaleX(1)';
-        });
+        const marqueeElement = document.getElementById('marquee');
+
+        setInterval(() => {
+            const randomText = marqueeText[Math.floor(Math.random() * marqueeText.length)];
+            marqueeElement.textContent = randomText;
+        }, 10000); // 每5秒切換一次文字
     </script>
 </body>
 </html>
