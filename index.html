@@ -11,8 +11,7 @@
             background-size: cover;
             margin: 0;
             padding: 0;
-            position: fixed; /* 鎖定頁面 */
-            overflow: hidden; /* 禁止滾動 */
+            position: relative;
         }
 
         /* 大標題樣式 */
@@ -146,13 +145,13 @@
             transition: transform 0.2s;
         }
 
-        #fire-goblin { top: 200px; left: 900px; }
-        #ice-goblin { top: 450px; left: 800px; }
-        #storm-goblin { top: 500px; left: 1100px; }
-        #flame-goblin { top: 300px; left: 1250px; }
-        #dark-goblin { top: 500px; left: 300px; }
-        #sinister-goblin { top: 530px; left: 1400px; }
-        #glutton-goblin { top: 350px; left: 500px; }
+        #fire-goblin { top: 400px; left: 900px; }
+        #ice-goblin { top: 650px; left: 800px; }
+        #storm-goblin { top: 700px; left: 1100px; }
+        #flame-goblin { top: 500px; left: 1250px; }
+        #dark-goblin { top: 700px; left: 300px; }
+        #sinister-goblin { top: 730px; left: 1400px; }
+        #glutton-goblin { top: 550px; left: 500px; }
 
         .goblin-card:hover img {
             transform: scale(1.1); /* 當鼠標懸停時，放大圖片 */
@@ -165,14 +164,6 @@
             transition: transform 0.2s;
             animation: shake 2s infinite ease-in-out;
         }
-        .goblin-card {
-            position: fixed; /* 將這些元素固定 */
-            top: 400px; /* 設定固定位置 */
-            left: 900px;
-            width: 150px;
-            text-align: center;
-            animation: shake 2s infinite ease-in-out;
-}
 
         .goblin-card img {
             width: 120%; /* 圖片自適應卡片寬度 */
