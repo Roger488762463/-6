@@ -11,7 +11,8 @@
             background-size: cover;
             margin: 0;
             padding: 0;
-            position: relative;
+            position: fixed; /* 鎖定頁面 */
+            overflow: hidden; /* 禁止滾動 */
         }
 
         /* 大標題樣式 */
@@ -159,11 +160,19 @@
 
         .goblin-card {
             position: absolute;
-            width: 100px; /* 增加寬度 */
+            width: 50px; /* 增加寬度 */
             text-align: center;
             transition: transform 0.2s;
             animation: shake 2s infinite ease-in-out;
         }
+        .goblin-card {
+            position: fixed; /* 將這些元素固定 */
+            top: 400px; /* 設定固定位置 */
+            left: 900px;
+            width: 150px;
+            text-align: center;
+            animation: shake 2s infinite ease-in-out;
+}
 
         .goblin-card img {
             width: 120%; /* 圖片自適應卡片寬度 */
